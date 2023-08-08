@@ -41,6 +41,8 @@ android {
 
 dependencies {
 
+    implementation(project(Modules.Domain.path))
+
     // Core
     implementation(Core.coreKtx)
     implementation(Core.lifecycleRuntime)
@@ -49,6 +51,7 @@ dependencies {
     implementation(Compose.activityCompose)
     implementation(Compose.composeUi)
     implementation(Compose.composeUiGraphics)
+    implementation(Compose.composeUiTooling)
     implementation(Compose.composeUiToolingPreview)
     implementation(Compose.material3)
 
@@ -57,5 +60,6 @@ dependencies {
 
     // Hilt
     implementation(Hilt.hiltAndroid)
+    implementation(Hilt.hiltNavigationCompose)
     kapt(Hilt.hiltCompiler)
 }

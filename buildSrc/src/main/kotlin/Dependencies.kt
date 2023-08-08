@@ -43,6 +43,10 @@ object Hilt {
     const val hiltNavigationCompose = "androidx.hilt:hilt-navigation-compose:1.1.0-alpha01"
 }
 
+object JavaX {
+    const val inject = "javax.inject:javax.inject:1"
+}
+
 object Retrofit {
     const val interceptor = "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11"
     const val converterGson = "com.squareup.retrofit2:converter-gson:2.9.0"

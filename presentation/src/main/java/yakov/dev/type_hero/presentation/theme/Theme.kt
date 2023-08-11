@@ -8,10 +8,13 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import yakov.dev.type_hero.presentation.theme.span_style.LocalSpanStyle
+import yakov.dev.type_hero.presentation.theme.span_style.SpanStyles
 
 private val LightColorScheme = lightColorScheme(
     primary = md_theme_light_primary,
@@ -44,7 +47,6 @@ private val LightColorScheme = lightColorScheme(
     outlineVariant = md_theme_light_outlineVariant,
     scrim = md_theme_light_scrim
 )
-
 
 private val DarkColorScheme = darkColorScheme(
     primary = md_theme_dark_primary,
@@ -102,9 +104,19 @@ fun TypeHeroTheme(
         onDispose {}
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
+    val spanStyles = SpanStyles(
+        colorText = colorScheme.onSurface,
+        colorCorrectText = colorScheme.primary,
+        colorErrorText = colorScheme.error
     )
+
+    CompositionLocalProvider(
+        LocalSpanStyle provides spanStyles
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = Typography,
+            content = content
+        )
+    }
 }

@@ -1,9 +1,8 @@
-package yakov.dev.type_hero.presentation.screen.game.components
+package yakov.dev.type_hero.presentation.screen.game.components.feedback_text
 
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.style.TextDecoration
@@ -11,7 +10,7 @@ import androidx.compose.ui.text.withStyle
 import yakov.dev.type_hero.domain.entity.TypeState
 
 @Composable
-fun AnnotatedString.Builder.BuildGameText(typeState : TypeState) {
+fun AnnotatedString.Builder.BuildFeedbackText(typeState : TypeState) {
     typeState.gameWords.forEachIndexed { i, gameWord ->
         when {
             // When we already input this word
@@ -23,7 +22,7 @@ fun AnnotatedString.Builder.BuildGameText(typeState : TypeState) {
                 }
             }
             // When the word is being entered at the moment
-            i == typeState.currentInputWordIndex && !isStartGame(typeState) -> {
+            i == typeState.currentInputWordIndex && !typeState.isStartGame -> {
                 // If we entered to many symbols
                 if (typeState.currentInputWord.length > gameWord.length) {
                     withStyle(spanStyleError().copy(textDecoration = TextDecoration.Underline)) {
@@ -79,6 +78,4 @@ private fun spanStyleToDo() = SpanStyle(color = LocalTextStyle.current.color.cop
 @Composable
 private fun spanStyleCorrect() = SpanStyle(color = LocalTextStyle.current.color)
 
-private fun isStartGame(typeState: TypeState) : Boolean {
-    return typeState.currentInputWordIndex == 0 && typeState.currentInputWord.isBlank()
-}
+private val TypeState.isStartGame : Boolean get() = currentInputWordIndex == 0 && currentInputWord.isBlank()

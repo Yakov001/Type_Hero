@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
 import yakov.dev.type_hero.domain.entity.TypeState
+import yakov.dev.type_hero.presentation.screen.game.components.feedback_text.BuildFeedbackText
 
 @Composable
 fun FeedbackTextArea(
@@ -23,7 +24,7 @@ fun FeedbackTextArea(
     ) {
         Text(
             text = buildAnnotatedString {
-                BuildGameText(typeState = typeState)
+                BuildFeedbackText(typeState = typeState)
             }
         )
     }

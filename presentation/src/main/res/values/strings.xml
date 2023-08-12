@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="type_here">Type Here</string>
+    <string name="correct">correct: %1$d</string>
+    <string name="time_left">%1$d s.</string>
+    <string name="accuracy">accuracy: %1$d</string>
+    <string name="words_per_min">%1$d w/m</string>
 </resources>

@@ -10,14 +10,12 @@ import java.util.Collections.addAll
 import javax.inject.Inject
 
 class InputUseCase @Inject constructor(
-    private val wordBankRepository : WordBankRepository
+    private val wordBankRepository : WordBankRepository,
+    private val gameFlowUseCase: GameFlowUseCase
 ) {
 
     private val _typeState = MutableStateFlow(TypeState(gameWords = wordBankRepository.getRandomWords()))
     val typeState = _typeState.asStateFlow()
-
-    private val _gameState = MutableStateFlow(GameState())
-    val gameState = _gameState.asStateFlow()
 
     fun onInput(input: String) {
         when {
@@ -33,13 +31,7 @@ class InputUseCase @Inject constructor(
             input.lastOrNull() == ' ' -> {
                 _typeState.update {
                     val isCorrect = it.currentInputWord == it.gameWords[it.currentInputWordIndex]
-                    if (isCorrect) {
-                        _gameState.update { gameState ->
-                            gameState.copy(
-                                score = gameState.score + 1
-                            )
-                        }
-                    }
+                    gameFlowUseCase.onWordFinish(isCorrect)
                     it.copy(
                         currentInputWordIndex = it.currentInputWordIndex + 1,
                         currentInputWord = String(),
@@ -49,7 +41,10 @@ class InputUseCase @Inject constructor(
                 addNewWords()
             }
             // Just entering the word...
-            else -> _typeState.update { it.copy(currentInputWord = input) }
+            else -> {
+                _typeState.update { it.copy(currentInputWord = input) }
+                gameFlowUseCase.onInput(input = input, typeState = typeState.value)
+            }
         }
     }
 

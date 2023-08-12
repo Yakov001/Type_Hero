@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import yakov.dev.type_hero.presentation.screen.game.components.FeedbackTextArea
+import yakov.dev.type_hero.presentation.screen.game.components.GameStatsArea
 import yakov.dev.type_hero.presentation.screen.game.components.PlayerTextField
 
 @Composable
@@ -27,6 +28,7 @@ fun ScreenGame(
         ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        GameStatsArea(gameState = gameState)
         FeedbackTextArea(typeState = typeState)
         PlayerTextField(
             text = typeState.currentInputWord,

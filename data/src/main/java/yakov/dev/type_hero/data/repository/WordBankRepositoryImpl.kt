@@ -8,4 +8,8 @@ class WordBankRepositoryImpl : WordBankRepository {
     override fun getRandomWords(amount: Int): List<String> {
         return WordBank.randomWords(amount)
     }
+
+    override fun getAdditionalWords(amount: Int): List<String> {
+        return WordBank.randomWords(amount)
+    }
 }

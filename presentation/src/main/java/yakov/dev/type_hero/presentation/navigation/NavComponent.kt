@@ -1,30 +1,24 @@
 package yakov.dev.type_hero.presentation.navigation
 
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import yakov.dev.type_hero.presentation.navigation.animation.EnterAnimation
-import yakov.dev.type_hero.presentation.navigation.animation.ExitAnimation
+import yakov.dev.type_hero.presentation.navigation.animation.MyEnterTransition
+import yakov.dev.type_hero.presentation.navigation.animation.MyExitTransition
 import yakov.dev.type_hero.presentation.screen.game.ScreenGame
 import yakov.dev.type_hero.presentation.screen.menu.ScreenMenu
 import yakov.dev.type_hero.presentation.screen.statistics.ScreenStatistics
 
 @[Composable]
 fun NavComponent() {
-    val (menuEnterTransition, setMenuEnterTransition) = remember { mutableStateOf<EnterAnimation>(EnterAnimation.SlideRight) }
-    val (menuExitTransition, setMenuExitTransition) = remember { mutableStateOf<ExitAnimation>(ExitAnimation.SlideDown) }
+    val (menuEnterTransition, setMenuEnterTransition) = remember { mutableStateOf<MyEnterTransition>(MyEnterTransition.SlideUp) }
+    val (menuExitTransition, setMenuExitTransition) = remember { mutableStateOf<MyExitTransition>(MyExitTransition.SlideDown) }
     Scaffold(
         topBar = { MyTopAppBar() }
     ) { scaffoldPadding ->
@@ -36,38 +30,34 @@ fun NavComponent() {
         ) {
             composable(
                 route = Screen.Menu.name,
-                enterTransition = menuEnterTransition.transition,
-                exitTransition = menuExitTransition.transition
+                enterTransition = menuEnterTransition,
+                exitTransition = menuExitTransition
             ) {
                 ScreenMenu(
                     toGame = {
                         navController.navigate(Screen.Game.name)
-                        setMenuExitTransition(ExitAnimation.SlideLeft)
+                        setMenuExitTransition(MyExitTransition.SlideLeft)
+                        setMenuEnterTransition(MyEnterTransition.SlideRight)
                     },
                     toStatistics = {
                         navController.navigate(Screen.Statistics.name)
-                        setMenuExitTransition(ExitAnimation.SlideDown)
+                        setMenuExitTransition(MyExitTransition.SlideDown)
+                        setMenuEnterTransition(MyEnterTransition.SlideUp)
                     }
                 )
             }
             composable(
                 route = Screen.Game.name,
-                enterTransition = { slideInHorizontally(initialOffsetX = {it}, animationSpec = tween(1000)) },
-                exitTransition = { slideOutHorizontally(targetOffsetX = {it}, animationSpec = tween(1000)) }
+                enterTransition = MyEnterTransition.SlideLeft,
+                exitTransition = MyExitTransition.SlideRight
             ) {
-                LaunchedEffect(Unit) {
-                    setMenuEnterTransition(EnterAnimation.SlideRight)
-                }
                 ScreenGame()
             }
             composable(
                 route = Screen.Statistics.name,
-                enterTransition = { slideInVertically(initialOffsetY = {-it}, animationSpec = tween(1000)) },
-                exitTransition = { slideOutVertically(targetOffsetY = {-it}, animationSpec = tween(1000)) }
+                enterTransition = MyEnterTransition.SlideDown,
+                exitTransition = MyExitTransition.SlideUp
             ) {
-                LaunchedEffect(Unit) {
-                    setMenuEnterTransition(EnterAnimation.SlideUp)
-                }
                 ScreenStatistics()
             }
         }

@@ -20,7 +20,7 @@ object Plugins {
 
 object ClassPath {
     const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.20"
-    const val gradle = "com.android.tools.build:gradle:8.0.2"
+    const val gradle = "com.android.tools.build:gradle:8.1.0"
 
     internal const val hilt_version = "2.46.1"
     const val hilt = "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
@@ -29,12 +29,12 @@ object ClassPath {
 object Android {
 
     const val nameSpace = "yakov.dev.type_hero"
-    const val compileSdk = 33
+    const val compileSdk = 34
 
     object DefaultConfig {
         const val applicationId = nameSpace
         const val minSdk = 24
-        const val targetSdk = 33
+        const val targetSdk = compileSdk
         const val versionCode = 1
         const val versionName = "1.0"
         const val useSupportLibrary = true

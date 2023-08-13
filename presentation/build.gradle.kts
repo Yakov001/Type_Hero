@@ -49,11 +49,13 @@ dependencies {
 
     // Compose
     implementation(Compose.activityCompose)
-    implementation(Compose.composeUi)
-    implementation(Compose.composeUiGraphics)
-    implementation(Compose.composeUiTooling)
-    implementation(Compose.composeUiToolingPreview)
+//    implementation(Compose.composeUi)
     implementation(Compose.material3)
+    implementation(Compose.composeUiGraphics)
+    debugImplementation(Compose.composeUiTooling)
+    implementation(Compose.composeUiToolingPreview)
+    // Navigation
+    implementation(Compose.navigation)
 
     // Accompanist for painting status bar
     implementation(Accompanist.systemUiController)

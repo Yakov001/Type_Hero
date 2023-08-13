@@ -17,7 +17,7 @@ object Compose {
     const val activityCompose = "androidx.activity:activity-compose:1.7.2"
     const val material3 = "androidx.compose.material3:material3:1.1.1"
 
-    const val navigation = "androidx.navigation:navigation-compose:2.6.0"
+    const val navigation = "androidx.navigation:navigation-compose:2.7.0"
 }
 
 object Bom {
@@ -35,6 +35,7 @@ object DataStore {
 
 object Accompanist {
     const val systemUiController = "com.google.accompanist:accompanist-systemuicontroller:0.31.4-beta"
+    const val navigationAnimation = "com.google.accompanist:accompanist-navigation-animation:<version>"
 }
 
 object Hilt {

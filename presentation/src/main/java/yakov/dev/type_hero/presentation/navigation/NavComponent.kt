@@ -19,10 +19,11 @@ import yakov.dev.type_hero.presentation.screen.statistics.ScreenStatistics
 fun NavComponent() {
     val (menuEnterTransition, setMenuEnterTransition) = remember { mutableStateOf<MyEnterTransition>(MyEnterTransition.SlideUp) }
     val (menuExitTransition, setMenuExitTransition) = remember { mutableStateOf<MyExitTransition>(MyExitTransition.SlideDown) }
+    val navController = rememberNavController()
+
     Scaffold(
-        topBar = { MyTopAppBar() }
+        topBar = { MyTopAppBar(navController = navController) }
     ) { scaffoldPadding ->
-        val navController = rememberNavController()
         NavHost(
             navController = navController,
             startDestination = Screen.Menu.name,
@@ -35,14 +36,14 @@ fun NavComponent() {
             ) {
                 ScreenMenu(
                     toGame = {
-                        navController.navigate(Screen.Game.name)
                         setMenuExitTransition(MyExitTransition.SlideLeft)
                         setMenuEnterTransition(MyEnterTransition.SlideRight)
+                        navController.navigate(Screen.Game.name)
                     },
                     toStatistics = {
-                        navController.navigate(Screen.Statistics.name)
                         setMenuExitTransition(MyExitTransition.SlideDown)
                         setMenuEnterTransition(MyEnterTransition.SlideUp)
+                        navController.navigate(Screen.Statistics.name)
                     }
                 )
             }

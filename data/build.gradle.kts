@@ -40,4 +40,9 @@ dependencies {
     // Hilt
     implementation(Hilt.hiltAndroid)
     kapt(Hilt.hiltCompiler)
+    
+    // Room
+    implementation(Room.base)
+    implementation(Room.coroutines)
+    kapt(Room.compiler)
 }

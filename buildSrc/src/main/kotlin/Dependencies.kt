@@ -60,3 +60,10 @@ object Gson {
 object Window {
     const val windowManager = "androidx.window:window:1.1.0"
 }
+
+object Room {
+    private const val room_version = "2.5.2"
+    const val base = "androidx.room:room-runtime:$room_version"
+    const val compiler = "androidx.room:room-compiler:$room_version"
+    const val coroutines = "androidx.room:room-ktx:$room_version"
+}

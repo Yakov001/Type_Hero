@@ -32,7 +32,7 @@ class GameFlowUseCase @Inject constructor(
         val char = input.lastOrNull() ?: error("Empty strings not allowed here")
         // If last char of our input is equal to same position char in gameWords, we are correct
         val isCorrect = typeState.run { char == gameWords[currentInputWordIndex][input.lastIndex] }
-        statsRepository.onInput(char = char, isCorrect = isCorrect)
+        statsRepository.onCharInput(char = char, isCorrect = isCorrect)
         manageTimer(typeState)
     }
 
@@ -57,7 +57,9 @@ class GameFlowUseCase @Inject constructor(
                 it.copy(timeLeftMillis = it.timeLeftMillis - 10L)
             }
             changeStatWordsPerMinute()
+            // On game finish
             if (_gameState.value.timeLeftMillis <= 0) {
+                statsRepository.saveGameResults(gameState = gameState.value)
                 _gameState.update { it.copy(gamePhase = GamePhase.Endgame) }
                 timer?.cancel()
                 timer = null

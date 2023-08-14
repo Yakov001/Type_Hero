@@ -49,11 +49,10 @@ dependencies {
 
     // Compose
     implementation(Compose.activityCompose)
-//    implementation(Compose.composeUi)
     implementation(Compose.material3)
     implementation(Compose.composeUiGraphics)
-    debugImplementation(Compose.composeUiTooling)
     implementation(Compose.composeUiToolingPreview)
+    debugImplementation(Compose.composeUiTooling)
     // Navigation
     implementation(Compose.navigation)
 

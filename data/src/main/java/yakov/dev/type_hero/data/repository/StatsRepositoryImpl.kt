@@ -1,5 +1,6 @@
 package yakov.dev.type_hero.data.repository
 
+import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import yakov.dev.type_hero.data.database.GameResultDatabase
@@ -24,6 +25,7 @@ class StatsRepositoryImpl @Inject constructor(
 
     override fun saveGameResults(gameState: GameState) {
         db().upsertGameResult(gameState.toDbModel())
+        Log.d("StatsRepositoryImpl", "saveGameResults: $gameState")
     }
 
     override fun getGameResults(): Flow<List<GameResult>> {

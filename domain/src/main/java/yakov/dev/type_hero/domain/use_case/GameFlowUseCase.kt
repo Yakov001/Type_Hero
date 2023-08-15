@@ -58,11 +58,10 @@ class GameFlowUseCase @Inject constructor(
             }
             changeStatWordsPerMinute()
             // On game finish
-            if (_gameState.value.timeLeftMillis <= 0) {
+            if (_gameState.value.timeLeftMillis == 0L) {
                 statsRepository.saveGameResults(gameState = gameState.value)
                 _gameState.update { it.copy(gamePhase = GamePhase.Endgame) }
                 timer?.cancel()
-                timer = null
             }
         }
     }

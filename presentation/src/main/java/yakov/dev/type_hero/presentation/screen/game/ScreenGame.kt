@@ -1,5 +1,6 @@
 package yakov.dev.type_hero.presentation.screen.game
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,9 +31,11 @@ fun ScreenGame(
     ) {
         GameStatsArea(gameState = gameState)
         FeedbackTextArea(typeState = typeState)
-        PlayerTextField(
-            text = typeState.currentInputWord,
-            onTextChange = { viewModel.onInput(it) }
-        )
+        AnimatedVisibility(visible = gameState.timeLeftMillis > 0) {
+            PlayerTextField(
+                text = typeState.currentInputWord,
+                onTextChange = { viewModel.onInput(it) }
+            )
+        }
     }
 }

@@ -3,10 +3,8 @@ package yakov.dev.type_hero.domain.use_case
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import yakov.dev.type_hero.domain.entity.GameState
 import yakov.dev.type_hero.domain.entity.TypeState
 import yakov.dev.type_hero.domain.repository.WordBankRepository
-import java.util.Collections.addAll
 import javax.inject.Inject
 
 class InputUseCase @Inject constructor(
@@ -43,14 +41,14 @@ class InputUseCase @Inject constructor(
             // Just entering the word...
             else -> {
                 _typeState.update { it.copy(currentInputWord = input) }
-                gameFlowUseCase.onInput(input = input, typeState = typeState.value)
+                gameFlowUseCase.onCharInput(input = input, typeState = typeState.value)
             }
         }
     }
 
     private fun addNewWords() {
         // add new words only when our gameWords are running out (player is fast)
-        if (_typeState.value.run{ gameWords.lastIndex - currentInputWordIndex > MINIMUM_LEFT }) return
+        if (_typeState.value.run { gameWords.lastIndex - currentInputWordIndex > MINIMUM_LEFT }) return
         _typeState.update {
             val newWords = wordBankRepository.getAdditionalWords()
             it.copy(gameWords = it.gameWords.toMutableList().apply { addAll(newWords) }.toList())

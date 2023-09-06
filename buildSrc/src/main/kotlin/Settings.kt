@@ -7,23 +7,25 @@ object Java {
 }
 
 object Plugins {
+    const val kotlinJvm = "org.jetbrains.kotlin.jvm"
+    const val javaLibrary = "java-library"
     const val androidApplication = "com.android.application"
     const val kotlinAndroid = "org.jetbrains.kotlin.android"
     const val androidLibrary = "com.android.library"
-
-    const val kotlinJvm = "org.jetbrains.kotlin.jvm"
-    const val javaLibrary = "java-library"
-
-    const val kapt = "kotlin-kapt"
+    const val ksp = "com.google.devtools.ksp"
     const val hilt = "com.google.dagger.hilt.android"
 }
 
 object ClassPath {
-    const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.20"
-    const val gradle = "com.android.tools.build:gradle:8.1.0"
+    internal const val kotlin_version = "1.9.10"
+    internal const val gradle_version = "8.1.0"
+    internal const val hilt_version = "2.48"
+    internal const val ksp_version = "1.9.10-1.0.13"
 
-    internal const val hilt_version = "2.46.1"
+    const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    const val gradle = "com.android.tools.build:gradle:$gradle_version"
     const val hilt = "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+    const val ksp = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:$ksp_version"
 }
 
 object Android {
@@ -51,5 +53,5 @@ object Android {
 }
 
 object ComposeOptions {
-    const val kotlinCompilerExtensionVersion = "1.4.6"
+    const val kotlinCompilerExtensionVersion = "1.5.3"
 }

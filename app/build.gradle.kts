@@ -4,7 +4,7 @@ plugins {
     id(Plugins.androidApplication)
     id(Plugins.kotlinAndroid)
     id(Plugins.hilt)
-    id(Plugins.kapt)
+    id(Plugins.ksp)
 }
 
 android {
@@ -52,5 +52,5 @@ dependencies {
 
     // Hilt
     implementation(Hilt.hiltAndroid)
-    kapt(Hilt.hiltCompiler)
+    ksp(Hilt.hiltCompiler)
 }

@@ -1,4 +1,5 @@
 import ClassPath.hilt_version
+import ClassPath.kotlin_version
 
 object Core {
     const val coreKtx = "androidx.core:core-ktx:1.10.1"
@@ -18,8 +19,7 @@ object Compose {
 }
 
 object Bom {
-    const val kotlinBom = "org.jetbrains.kotlin:kotlin-bom:1.8.20"
-    const val composeBom = "androidx.compose:compose-bom:2023.06.00"
+    const val kotlinBom = "org.jetbrains.kotlin:kotlin-bom:$kotlin_version"
 }
 
 object Coroutines {

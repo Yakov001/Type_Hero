@@ -11,4 +11,9 @@ java {
 dependencies {
     implementation(Coroutines.core)
     implementation(JavaX.inject)
+
+    // Testing
+    testImplementation(Testing.junit)
+    testImplementation(Testing.mockitoCore)
+    testImplementation(Testing.mockitoKotlin)
 }

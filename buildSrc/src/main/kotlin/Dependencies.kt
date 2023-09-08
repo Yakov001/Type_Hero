@@ -23,7 +23,7 @@ object Bom {
 }
 
 object Coroutines {
-    const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1"
+    const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
 }
 
 object Accompanist {
@@ -45,4 +45,10 @@ object Room {
     const val base = "androidx.room:room-runtime:$room_version"
     const val compiler = "androidx.room:room-compiler:$room_version"
     const val coroutines = "androidx.room:room-ktx:$room_version"
+}
+
+object Testing {
+    const val junit = "junit:junit:4.13.2"
+    const val mockitoCore = "org.mockito:mockito-core:5.5.0"
+    const val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:5.1.0"
 }

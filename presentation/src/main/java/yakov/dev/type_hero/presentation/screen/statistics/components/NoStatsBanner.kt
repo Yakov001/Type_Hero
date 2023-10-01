@@ -1,6 +1,7 @@
 package yakov.dev.type_hero.presentation.screen.statistics.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,20 +17,27 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun NoStatsBanner() {
-    Card(
+    Box(
         modifier = Modifier
-            .fillMaxWidth(0.5f)
-            .aspectRatio(1f)
+            .fillMaxWidth()
+            .aspectRatio(1f),
+        contentAlignment = Alignment.Center
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(
-                space = 16.dp,
-                alignment = Alignment.CenterVertically
-            ),
-            horizontalAlignment = Alignment.CenterHorizontally
+        Card(
+            modifier = Modifier
+                .fillMaxWidth(0.5f)
+                .aspectRatio(1f)
         ) {
-            Icon(imageVector = Icons.Default.Refresh, contentDescription = null)
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(
+                    space = 16.dp,
+                    alignment = Alignment.CenterVertically
+                ),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Icon(imageVector = Icons.Default.Refresh, contentDescription = null)
+            }
         }
     }
 }

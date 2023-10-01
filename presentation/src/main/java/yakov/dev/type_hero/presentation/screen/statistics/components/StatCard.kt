@@ -2,7 +2,6 @@ package yakov.dev.type_hero.presentation.screen.statistics.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,10 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import yakov.dev.type_hero.domain.entity.GameResult
 
 @Composable
-fun StatCard(statsState: List<GameResult>) {
+fun StatCard(stats: List<Float>, statsName : String) {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -32,9 +30,9 @@ fun StatCard(statsState: List<GameResult>) {
             ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "w/m", style = MaterialTheme.typography.headlineSmall)
+            Text(text = statsName, style = MaterialTheme.typography.headlineSmall)
             Divider(modifier = Modifier.fillMaxWidth().height(1.dp))
-            StatLineChartCanvas(statsState)
+            StatLineChartCanvas(stats)
         }
     }
 }

@@ -41,9 +41,15 @@ fun ScreenStatistics(
             contentPadding = PaddingValues(8.dp)
         ) {
             if (statsState.isNotEmpty()) {
-                items(count = 10) {
-                    StatCard(statsState = statsState)
-                    Spacer(modifier = Modifier.height(16.dp))
+                buildList {
+                    statsState.random().stats.indices.forEach { i ->
+                        add(statsState.map { it.stats[i] })
+                    }
+                }.forEach {
+                    item {
+                        StatCard(stats = it.map { r -> r.value }, statsName = it.random().name)
+                        Spacer(modifier = Modifier.height(16.dp))
+                    }
                 }
             } else {
                 item { NoStatsBanner() }

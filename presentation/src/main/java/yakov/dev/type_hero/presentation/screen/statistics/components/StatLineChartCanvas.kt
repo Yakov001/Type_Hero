@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import yakov.dev.type_hero.domain.entity.GameResult
 
 @Composable
-fun StatLineChartCanvas(stats: List<GameResult>) {
+fun StatLineChartCanvas(stats: List<Float>) {
     Canvas(
         modifier = Modifier
             .fillMaxWidth()
@@ -56,13 +56,13 @@ fun StatLineChartCanvas(stats: List<GameResult>) {
     }
 }
 
-fun DrawScope.buildStatPath(stats: List<GameResult>) : Path {
+fun DrawScope.buildStatPath(stats: List<Float>) : Path {
     val side = size.maxDimension
 
-    val yMin = stats.minOf { it.wordsPerMin }
-    val yMax = stats.maxOf { it.wordsPerMin }
+    val yMin = stats.min()
+    val yMax = stats.max()
     val yRange = ((yMax - yMin) * 1.5f).coerceAtLeast(yMin * 2f)
-    fun Int.toYAxis() : Float = this / yRange * side
+    fun Float.toYAxis() : Float = this / yRange * side
 
     val xSegments = stats.size
     val xSegmentLen = side / xSegments
@@ -73,10 +73,10 @@ fun DrawScope.buildStatPath(stats: List<GameResult>) : Path {
             x = 0f,
             y = side
         )
-        stats.forEachIndexed { i, gameResult ->
+        stats.forEachIndexed { i, stat ->
             lineTo(
                 x = i.toXAxis(),
-                y = gameResult.wordsPerMin.toYAxis()
+                y = stat.toYAxis()
             )
         }
     }
